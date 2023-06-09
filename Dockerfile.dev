@@ -1,0 +1,18 @@
+FROM node:18
+
+#para detectar los cambios
+RUN npm i -g nodemon
+
+RUN mkdir -p /home/app
+
+#se quito el copy por que se usaran volumenes
+# aumente estas lineas para cambiar la carpeta en donde se ejecutaran los comandos
+WORKDIR /home/app
+
+# continuamos con el tutorial
+EXPOSE 3000
+
+CMD [ "nodemon", "index.js" ]
+
+# para que si funcione el restarting
+CMD [ "nodemon", "-L" ]

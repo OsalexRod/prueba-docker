@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  chanchito:
+    build:
+      context: . #(. ruta actual)donde se encuenta la app o contexto que trabajamos
+      dockerfile: Dockerfile.dev #le indicamos donde esta el archivo para construir la imagen
+    ports:
+      - "3000:3000"
+    links:
+      - monguito
+    volumes:
+      - .:/home/app  #(. indicamos que la ruta actual debe ser montada en el volumen, : (ruta de destino dentro del contenedor))volumen anonimo
+  monguito:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=nico
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
